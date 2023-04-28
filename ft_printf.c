@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/28 20:16:40 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/04/28 20:21:01 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,31 @@ void	ft_putnbr_int(int nb)
 	}
 }
 
+void	ft_putnbr_uint(unsigned int nb)
+{
+	char	num;
+
+	if (nb < 0)
+	{
+		nb *= -1;
+		write(1, "-", 1);
+		ft_putnbr_int(nb);
+	}
+	if (nb >= 0)
+	{
+		if (0 <= nb && nb <= 9)
+		{
+			num = '0' + nb;
+			write(1, &num, 1);
+		}
+		else
+		{
+			ft_putnbr_uint(nb / 10);
+			ft_putnbr_uint(nb % 10);
+		}
+	}
+}
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
@@ -147,6 +172,11 @@ int	ft_printf(const char *str, ...)
 		else if (str[idx + 1] && str[idx + 1] == 'i')
 		{
 			ft_putnbr_int(va_arg(ap, int));
+			idx++;
+		}
+		else if (str[idx + 1] && str[idx + 1] == 'u')
+		{
+			ft_putnbr_uint(va_arg(ap, unsigned int));
 			idx++;
 		}
 		idx++;
