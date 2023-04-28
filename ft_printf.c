@@ -6,24 +6,51 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/19 17:52:05 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:30:30 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
+
+void	ft_putchar(char *c)
+{
+	write(1, c, 1);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
 
 int	ft_printf(const char *str, ...)
 {
-	va_list	numlist;
-	int	i;
+	va_list	ap;
+	size_t	idx;
+	char	tmp;
 
-	va_start(numlist, numargs);
-	i = 10
-	while (i < 0)
+	idx = 0;
+	va_start(ap, str);
+	while (str[idx])
 	{
-		printf("%d 번째 가변인자 : %d \n", i + 1, (va_arg(numlist, int)));
-		i++;
+		if (str[idx] != '%')
+		{
+			tmp = str[idx];
+			ft_putchar(&tmp);
+		}
+		if (str[idx + 1] && str[idx + 1] == 'd')
+		{
+			tmp = '0' + va_arg(ap, int);
+			ft_putchar(&tmp);
+			idx++;
+		}
+		idx++;
 	}
-	//사용이 끝난 가변인자 목록 포인터의 소멸
-	va_end(numlist);
+	va_end(ap);
+	return (ft_strlen(str));
 }

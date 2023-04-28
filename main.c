@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 17:25:34 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/19 17:25:52 by seunlee2         ###   ########.fr       */
+/*   Created: 2023/04/28 16:57:36 by seunlee2          #+#    #+#             */
+/*   Updated: 2023/04/28 19:03:58 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int	main(void)
 {
-	
+	ft_printf("%d %d %d %d %d", 3, 4, 5, 6, 7);
 	return (0);
 }
