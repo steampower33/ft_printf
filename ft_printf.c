@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/28 19:49:08 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/04/28 20:12:13 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,49 @@ void	ft_putstr(char *c)
 
 	idx = 0;
 	while (idx < ft_strlen(c))
+		ft_putchar(&c[idx++]);
+}
+
+void	ft_putnbr_hex(long long nb)
+{
+	char	num;
+
+	if (nb >= 0)
 	{
-		ft_putchar(&c[idx]);
-		idx++;
+		if (0 <= nb && nb <= 9)
+		{
+			num = '0' + nb;
+			write(1, &num, 1);
+		}
+		else if (10 <= nb && nb <= 15)
+		{
+			num = 'a' + nb - 10;
+			write(1, &num, 1);
+		}
+		else
+		{
+			ft_putnbr_hex(nb / 16);
+			ft_putnbr_hex(nb % 16);
+		}
+	}
+}
+
+void	ft_putnbr_dec(int nb)
+{
+	char	num;
+
+	if (nb >= 0)
+	{
+		if (0 <= nb && nb <= 9)
+		{
+			num = '0' + nb;
+			write(1, &num, 1);
+		}
+		else
+		{
+			ft_putnbr_dec(nb / 10);
+			ft_putnbr_dec(nb % 10);
+		}
 	}
 }
 
@@ -68,13 +108,13 @@ int	ft_printf(const char *str, ...)
 		}
 		else if (str[idx + 1] && str[idx + 1] == 'p')
 		{
-			
+			write(1, "0x", 2);
+			ft_putnbr_hex(va_arg(ap, long long));
 			idx++;
 		}
 		else if (str[idx + 1] && str[idx + 1] == 'd')
 		{
-			tmp = '0' + va_arg(ap, int);
-			ft_putchar(&tmp);
+			ft_putnbr_dec(va_arg(ap, int));
 			idx++;
 		}
 		idx++;
