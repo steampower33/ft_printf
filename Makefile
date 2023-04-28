@@ -6,12 +6,12 @@
 #    By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 17:02:34 by seunlee2          #+#    #+#              #
-#    Updated: 2023/04/28 19:35:05 by seunlee2         ###   ########.fr        #
+#    Updated: 2023/04/28 20:47:19 by seunlee2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft_printf.a
-SRCS = ft_printf.c
+NAME = libftprintf.a
+SRCS = ft_printf.c ft_printf_util.c ft_putnbr.c
 HEADER = ft_printf.h
 OBJECTS = $(SRCS:.c=.o)
 CC = cc
