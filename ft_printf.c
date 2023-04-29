@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/28 20:44:14 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:28:29 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,69 +16,44 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	size_t	idx;
-	char	tmp;
+	size_t	result;
 
+	if (!str)
+		return (0);
 	idx = 0;
+	result = 0;
 	va_start(ap, str);
 	while (str[idx])
 	{
 		if (str[idx] != '%')
-		{
-			tmp = str[idx];
-			ft_putchar(&tmp);
-		}
-		else
+			ft_putchar(str[idx], &result);
+		else if (str[idx] == '%')
 		{
 			if (str[idx + 1] && str[idx + 1] == 'c')
-			{
-				tmp = va_arg(ap, int);
-				ft_putchar(&tmp);
-				idx++;
-			}
+				ft_putchar((char)va_arg(ap, int), &result);
 			else if (str[idx + 1] && str[idx + 1] == 's')
-			{
-				ft_putstr(va_arg(ap, char *));
-				idx++;
-			}
+				ft_putstr(va_arg(ap, char *), &result);
 			else if (str[idx + 1] && str[idx + 1] == 'p')
 			{
-				write(1, "0x", 2);
-				ft_putnbr_hex(va_arg(ap, long long), 1);
-				idx++;
+				ft_putstr("0x", &result);
+				ft_putnbr_hex(va_arg(ap, unsigned long long), 1, &result);
 			}
 			else if (str[idx + 1] && str[idx + 1] == 'd')
-			{
-				ft_putnbr_dec(va_arg(ap, long long));
-				idx++;
-			}
+				ft_putnbr_dec(va_arg(ap, int), &result);
 			else if (str[idx + 1] && str[idx + 1] == 'i')
-			{
-				ft_putnbr_int(va_arg(ap, int));
-				idx++;
-			}
+				ft_putnbr_int(va_arg(ap, int), &result);
 			else if (str[idx + 1] && str[idx + 1] == 'u')
-			{
-				ft_putnbr_uint(va_arg(ap, unsigned int));
-				idx++;
-			}
+				ft_putnbr_uint(va_arg(ap, unsigned int), &result);
 			else if (str[idx + 1] && str[idx + 1] == 'x')
-			{
-				ft_putnbr_hex(va_arg(ap, long long), 1);
-				idx++;
-			}
+				ft_putnbr_hex(va_arg(ap, unsigned int), 1, &result);
 			else if (str[idx + 1] && str[idx + 1] == 'X')
-			{
-				ft_putnbr_hex(va_arg(ap, long long), 0);
-				idx++;
-			}
+				ft_putnbr_hex(va_arg(ap, unsigned int), 0, &result);
 			else if (str[idx + 1] && str[idx + 1] == '%')
-			{
-				ft_putchar("%");
-				idx++;
-			}
+				ft_putchar('%', &result);
+			idx++;
 		}
 		idx++;
 	}
 	va_end(ap);
-	return (ft_strlen(str));
+	return (result);
 }
