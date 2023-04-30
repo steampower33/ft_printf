@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/30 15:52:48 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/04/30 16:42:50 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,24 @@ void	ft_conversions(const char *str, va_list ap, size_t *result, size_t *idx)
 {
 	if (str[*idx] != '%')
 		ft_putchar(str[*idx], result);
-	else if (str[*idx] == '%')
+	else if (str[*idx] == '%' && str[*idx + 1])
 	{
-		if (str[*idx + 1] && str[*idx + 1] == 'c')
-			ft_putchar((char)va_arg(ap, int), result);
-		else if (str[*idx + 1] && str[*idx + 1] == 's')
+		if (str[*idx + 1] == 'c')
+			ft_putchar(va_arg(ap, int), result);
+		else if (str[*idx + 1] == 's')
 			ft_putstr(va_arg(ap, char *), result);
-		else if (str[*idx + 1] && str[*idx + 1] == 'p')
+		else if (str[*idx + 1] == 'p')
 			ft_putnbr_hex(va_arg(ap, unsigned long long), result,
 				str[*idx + 1]);
-		else if (str[*idx + 1] && str[*idx + 1] == 'd')
+		else if (str[*idx + 1] == 'd')
 			ft_putnbr_dec(va_arg(ap, int), result);
-		else if (str[*idx + 1] && str[*idx + 1] == 'i')
+		else if (str[*idx + 1] == 'i')
 			ft_putnbr_int(va_arg(ap, int), result);
-		else if (str[*idx + 1] && str[*idx + 1] == 'u')
+		else if (str[*idx + 1] == 'u')
 			ft_putnbr_uint(va_arg(ap, unsigned int), result);
-		else if (str[*idx + 1] && (str[*idx + 1] == 'x'
-				|| str[*idx + 1] == 'X'))
+		else if ((str[*idx + 1] == 'x' || str[*idx + 1] == 'X'))
 			ft_putnbr_hex(va_arg(ap, unsigned int), result, str[*idx + 1]);
-		else if (str[*idx + 1] && str[*idx + 1] == '%')
+		else if (str[*idx + 1] == '%')
 			ft_putchar('%', result);
 		*idx += 1;
 	}	
