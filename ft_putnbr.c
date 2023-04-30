@@ -6,13 +6,13 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 20:42:20 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/29 17:28:37 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:50:59 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr_hex(unsigned long long nb, int isLower, size_t *result)
+void	ft_putnbr_hex_rec(unsigned long long nb, int isLower, size_t *result)
 {
 	char	num;
 
@@ -33,10 +33,23 @@ void	ft_putnbr_hex(unsigned long long nb, int isLower, size_t *result)
 		}
 		else
 		{
-			ft_putnbr_hex(nb / 16, isLower, result);
-			ft_putnbr_hex(nb % 16, isLower, result);
+			ft_putnbr_hex_rec(nb / 16, isLower, result);
+			ft_putnbr_hex_rec(nb % 16, isLower, result);
 		}
 	}
+}
+
+void	ft_putnbr_hex(unsigned long long nb, size_t *result, char conversion)
+{
+	if (conversion == 'p')
+	{
+		ft_putstr("0x", result);
+		ft_putnbr_hex_rec(nb, 1, result);
+	}
+	else if (conversion == 'x')
+		ft_putnbr_hex_rec(nb, 1, result);
+	else if (conversion == 'X')
+		ft_putnbr_hex_rec(nb, 0, result);
 }
 
 void	ft_putnbr_dec(long long nb, size_t *result)
