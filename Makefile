@@ -6,7 +6,7 @@
 #    By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 17:02:34 by seunlee2          #+#    #+#              #
-#    Updated: 2023/04/29 12:48:33 by seunlee2         ###   ########.fr        #
+#    Updated: 2023/05/04 20:23:04 by seunlee2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJECTS)
-	ar -r $@ $^
+	ar -rcs $@ $^
 
 all: $(NAME)
 

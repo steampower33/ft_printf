@@ -6,13 +6,13 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/30 16:42:50 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:51:56 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conversions(const char *str, va_list ap, size_t *result, size_t *idx)
+void	ft_conversions(const char *str, va_list ap, int *result, size_t *idx)
 {
 	if (str[*idx] != '%')
 		ft_putchar(str[*idx], result);
@@ -43,7 +43,7 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	size_t	idx;
-	size_t	result;
+	int		result;
 
 	if (!str)
 		return (0);
@@ -53,6 +53,8 @@ int	ft_printf(const char *str, ...)
 	while (str[idx])
 	{
 		ft_conversions(str, ap, &result, &idx);
+		if (result == -1)
+			return (-1);
 		idx++;
 	}
 	va_end(ap);

@@ -6,16 +6,18 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 20:42:20 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/30 15:50:59 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:50:05 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr_hex_rec(unsigned long long nb, int isLower, size_t *result)
+void	ft_putnbr_hex_rec(unsigned long long nb, int isLower, int *result)
 {
 	char	num;
 
+	if (*result == -1)
+		return ;
 	if (nb >= 0)
 	{
 		if (0 <= nb && nb <= 9)
@@ -39,7 +41,7 @@ void	ft_putnbr_hex_rec(unsigned long long nb, int isLower, size_t *result)
 	}
 }
 
-void	ft_putnbr_hex(unsigned long long nb, size_t *result, char conversion)
+void	ft_putnbr_hex(unsigned long long nb, int *result, char conversion)
 {
 	if (conversion == 'p')
 	{
@@ -50,12 +52,16 @@ void	ft_putnbr_hex(unsigned long long nb, size_t *result, char conversion)
 		ft_putnbr_hex_rec(nb, 1, result);
 	else if (conversion == 'X')
 		ft_putnbr_hex_rec(nb, 0, result);
+	if (*result == -1)
+		return ;
 }
 
-void	ft_putnbr_dec(long long nb, size_t *result)
+void	ft_putnbr_dec(long long nb, int *result)
 {
 	char	num;
 
+	if (*result == -1)
+		return ;
 	if (nb < 0)
 	{
 		nb *= -1;
@@ -77,10 +83,12 @@ void	ft_putnbr_dec(long long nb, size_t *result)
 	}
 }
 
-void	ft_putnbr_int(int nb, size_t *result)
+void	ft_putnbr_int(int nb, int *result)
 {
 	char	num;
 
+	if (*result == -1)
+		return ;
 	if (nb == -2147483648)
 		ft_putstr("-2147483648", result);
 	else if (nb < 0)
@@ -104,10 +112,12 @@ void	ft_putnbr_int(int nb, size_t *result)
 	}
 }
 
-void	ft_putnbr_uint(unsigned int nb, size_t *result)
+void	ft_putnbr_uint(unsigned int nb, int *result)
 {
 	char	num;
 
+	if (*result == -1)
+		return ;
 	if (nb < 0)
 	{
 		nb *= -1;

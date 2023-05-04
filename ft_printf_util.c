@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 20:41:30 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/04/30 15:32:39 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:52:00 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,25 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-void	ft_putchar(char c, size_t	*result)
+void	ft_putchar(char c, int *result)
 {
-	write(1, &c, 1);
-	*result += 1;
+	if (write(1, &c, 1) == -1)
+		*result = -1;
+	else
+		*result += 1;
 }
 
-size_t	ft_putstr(char *c, size_t *result)
+void	ft_putstr(char *c, int *result)
 {
 	size_t	idx;
 
-	if (!c)
+	if (c == (char *) NULL)
 		c = "(null)";
 	idx = 0;
 	while (idx < ft_strlen(c))
+	{
 		ft_putchar(c[idx++], result);
-	return (idx);
+		if (*result == -1)
+			return ;
+	}
 }
