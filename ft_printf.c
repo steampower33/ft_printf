@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:23:28 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/05/04 20:51:56 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/05/15 22:03:20 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_conversions(const char *str, va_list ap, int *result, size_t *idx)
 			ft_putnbr_hex(va_arg(ap, unsigned long long), result,
 				str[*idx + 1]);
 		else if (str[*idx + 1] == 'd')
-			ft_putnbr_dec(va_arg(ap, int), result);
+			ft_putnbr_int(va_arg(ap, int), result);
 		else if (str[*idx + 1] == 'i')
 			ft_putnbr_int(va_arg(ap, int), result);
 		else if (str[*idx + 1] == 'u')
@@ -35,8 +35,10 @@ void	ft_conversions(const char *str, va_list ap, int *result, size_t *idx)
 			ft_putnbr_hex(va_arg(ap, unsigned int), result, str[*idx + 1]);
 		else if (str[*idx + 1] == '%')
 			ft_putchar('%', result);
+		else
+			ft_putchar(str[*idx + 1], result);
 		*idx += 1;
-	}	
+	}
 }
 
 int	ft_printf(const char *str, ...)

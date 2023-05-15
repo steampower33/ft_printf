@@ -6,7 +6,7 @@
 /*   By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:24:02 by seunlee2          #+#    #+#             */
-/*   Updated: 2023/05/04 20:49:22 by seunlee2         ###   ########.fr       */
+/*   Updated: 2023/05/15 22:04:02 by seunlee2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_putchar(char c, int *result);
 void	ft_putstr(char *c, int *result);
 
 void	ft_putnbr_hex(unsigned long long nb, int *result, char conversion);
-void	ft_putnbr_dec(long long nb, int *result);
 void	ft_putnbr_int(int nb, int *result);
 void	ft_putnbr_uint(unsigned int nb, int *result);
 
